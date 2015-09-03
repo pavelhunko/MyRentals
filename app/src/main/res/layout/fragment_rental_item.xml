@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Street"
+        android:id="@+id/ri_street"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City"
+        android:id="@+id/ri_city"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ri_street"
+        android:layout_toEndOf="@+id/ri_street" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="State"
+        android:id="@+id/ri_state"
+        android:layout_below="@+id/ri_street"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total:"
+        android:id="@+id/ri_label_total"
+        android:layout_below="@+id/ri_city"
+        android:layout_toRightOf="@+id/ri_city"
+        android:layout_toEndOf="@+id/ri_city"
+        android:layout_marginLeft="99dp"
+        android:layout_marginStart="99dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Landlord"
+        android:id="@+id/ri_landlord"
+        android:layout_below="@+id/ri_state"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Timeframe"
+        android:id="@+id/ri_timeframe"
+        android:layout_below="@+id/ri_label_total"
+        android:layout_alignLeft="@+id/ri_label_total"
+        android:layout_alignStart="@+id/ri_label_total" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100"
+        android:id="@+id/ri_total"
+        android:layout_alignTop="@+id/ri_label_total"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
