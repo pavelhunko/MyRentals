@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         mFragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         RentalsOverviewFragment roFragment = new RentalsOverviewFragment();
-        fragmentTransaction.add(roFragment, TAG);
+        fragmentTransaction.add(R.id.fragment_container, roFragment);
         fragmentTransaction.commit();
     }
 

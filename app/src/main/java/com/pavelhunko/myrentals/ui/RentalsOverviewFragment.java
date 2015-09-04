@@ -1,12 +1,13 @@
 package com.pavelhunko.myrentals.ui;
 
+import android.app.Fragment;
 import android.app.ListFragment;
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.pavelhunko.myrentals.DAO.RentalDAOImpl;
@@ -30,16 +31,18 @@ public class RentalsOverviewFragment extends ListFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mAdapter = new RentalsListAdapter(getActivity().getApplicationContext());
         setListAdapter(mAdapter);
+        if (mAdapter.getCount() == 0)
+            loadItems();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mAdapter.getCount() == 0)
-            loadItems();
+
     }
 
     private void loadItems() {
