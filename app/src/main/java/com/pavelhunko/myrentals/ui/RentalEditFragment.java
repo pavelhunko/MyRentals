@@ -32,6 +32,8 @@ public class RentalEditFragment extends Fragment {
 
     }
 
+    //after posting result to db and fragment call notifyDataSetChanged() on Adapter
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
