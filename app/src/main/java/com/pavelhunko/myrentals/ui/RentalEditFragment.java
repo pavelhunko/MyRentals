@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.pavelhunko.myrentals.R;
 
 
 public class RentalEditFragment extends Fragment {
 
+    private Bundle mBundle;
     public static RentalEditFragment newInstance() {
         RentalEditFragment fragment = new RentalEditFragment();
         Bundle args = new Bundle();
@@ -20,12 +22,13 @@ public class RentalEditFragment extends Fragment {
     }
 
     public RentalEditFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBundle = getArguments();
 
     }
 
@@ -33,7 +36,11 @@ public class RentalEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rental_edit, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_rental_edit, container, false);
+        TextView city = (TextView) fragmentView.findViewById(R.id.fragment_rental_edit_city);
+        String s = mBundle.getString("city");
+        city.setText(s);
+        return fragmentView;
     }
 
 

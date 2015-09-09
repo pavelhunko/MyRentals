@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pavelhunko.myrentals.DAO.RentalDAOImpl;
 import com.pavelhunko.myrentals.R;
@@ -57,6 +58,13 @@ public class RentalsOverviewFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         RentalEditFragment rentalEditFragment = new RentalEditFragment();
+
+        final Bundle bundle = new Bundle();
+        TextView tv = (TextView) v.findViewById(R.id.ri_city);
+        String s = tv.getText().toString();
+        bundle.putString("city", s);
+        rentalEditFragment.setArguments(bundle);
+
         this.getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, rentalEditFragment)
                 .addToBackStack(null).commit();

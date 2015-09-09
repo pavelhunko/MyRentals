@@ -12,7 +12,6 @@ import com.pavelhunko.myrentals.R;
 public class MainActivity extends AppCompatActivity {
 
     private static FragmentManager mFragmentManager;
-    private String TAG = "FragmentTransaction";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
