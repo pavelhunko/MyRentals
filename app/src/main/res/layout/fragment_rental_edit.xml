@@ -1,9 +1,115 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pavelhunko.myrentals.ui.RentalEditFragment">
 
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <EditText
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_street"
+        android:layout_gravity="left|top"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Street"
+        android:layout_alignRight="@+id/fragment_rental_edit_state"
+        android:layout_alignEnd="@+id/fragment_rental_edit_state" />
 
-</FrameLayout>
+    <EditText
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_city"
+        android:layout_gravity="left|center_vertical"
+        android:layout_below="@+id/fragment_rental_edit_street"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="City"
+        android:layout_toLeftOf="@+id/fragment_rental_edit_state"
+        android:layout_toStartOf="@+id/fragment_rental_edit_state" />
+
+    <EditText
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_state"
+        android:layout_gravity="right|center_vertical"
+        android:layout_below="@+id/fragment_rental_edit_street"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="State" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly Rent"
+        android:id="@+id/fragment_rental_edit_mrent_label"
+        android:layout_below="@+id/fragment_rental_edit_city"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_mrent"
+        android:layout_below="@+id/fragment_rental_edit_mrent_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="What I Pay"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_landlord"
+        android:text="Company"
+        android:layout_below="@+id/fragment_rental_edit_landlord_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/fragment_rental_edit_landlord_checkbox"
+        android:layout_alignEnd="@+id/fragment_rental_edit_landlord_checkbox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Landlord"
+        android:id="@+id/fragment_rental_edit_landlord_label"
+        android:layout_below="@+id/fragment_rental_edit_mrent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I Pay To An Individual"
+        android:id="@+id/fragment_rental_edit_landlord_checkbox"
+        android:checked="false"
+        android:layout_alignTop="@+id/fragment_rental_edit_landlord_label"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_movein"
+        android:layout_below="@+id/fragment_rental_edit_landlord"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Move-in" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_rental_edit_moveout"
+        android:layout_below="@+id/fragment_rental_edit_landlord"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="Move-out" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to"
+        android:id="@+id/fragment_rental_edit_dates_divider_label"
+        android:layout_alignTop="@+id/fragment_rental_edit_moveout"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

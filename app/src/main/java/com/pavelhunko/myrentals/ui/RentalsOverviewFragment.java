@@ -1,10 +1,8 @@
 package com.pavelhunko.myrentals.ui;
 
-import android.app.Fragment;
 import android.app.ListFragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +23,7 @@ public class RentalsOverviewFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_rentals_overview, container, false);
     }
@@ -58,6 +56,11 @@ public class RentalsOverviewFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        RentalEditFragment rentalEditFragment = new RentalEditFragment();
+        this.getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, rentalEditFragment)
+                .addToBackStack(null).commit();
+
 
     }
 }
