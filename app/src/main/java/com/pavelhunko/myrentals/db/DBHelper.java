@@ -3,6 +3,7 @@ package com.pavelhunko.myrentals.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 
 import java.util.Date;
 
@@ -11,7 +12,6 @@ import java.util.Date;
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rentals_db";
-    private static final String TABLE_RENTALS = "rentals";
     private static final int DATABASE_VERSION = 1;
 
     private static DBHelper sInstance;
@@ -36,5 +36,17 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    //implement http://androidopentutorials.com/android-sqlite-example/
+
+    public static abstract class RentalEntry implements BaseColumns {
+        public static final String TABLE_RENTALS = "rentals";
+        public static final String RENTAL_ID = "street";
+        public static final String RENTAL_STREET = "street";
+        public static final String RENTAL_CITY = "city";
+        public static final String RENTAL_STATE = "state";
+        public static final String RENTAL_MOVE_IN = "movein";
+        public static final String RENTAL_MOVE_OUT = "moveout";
     }
 }

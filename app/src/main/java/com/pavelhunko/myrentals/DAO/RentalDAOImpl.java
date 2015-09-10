@@ -1,5 +1,7 @@
 package com.pavelhunko.myrentals.DAO;
 
+import android.provider.BaseColumns;
+
 import com.pavelhunko.myrentals.model.Rental;
 
 import java.text.ParseException;
@@ -13,13 +15,7 @@ import java.util.Locale;
  */
 public class RentalDAOImpl implements RentalDAO{
 
-    public static final String TABLE_RENTALS = "rentals";
-    public static final String RENTAL_ID = "street";
-    public static final String RENTAL_STREET = "street";
-    public static final String RENTAL_CITY = "city";
-    public static final String RENTAL_STATE = "state";
-    public static final String RENTAL_MOVE_IN = "movein";
-    public static final String RENTAL_MOVE_OUT = "moveout";
+
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
@@ -71,5 +67,7 @@ public class RentalDAOImpl implements RentalDAO{
 //        intent.putExtra(RentalDAO.RENTALS_MOVE_OUT, moveOutDate);
 //
 //    }
+
+
 
 }
