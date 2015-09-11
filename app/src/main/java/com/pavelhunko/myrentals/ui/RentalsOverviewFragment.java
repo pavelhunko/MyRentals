@@ -15,10 +15,14 @@ import com.pavelhunko.myrentals.adapter.RentalsListAdapter;
 import com.pavelhunko.myrentals.model.Rental;
 
 import java.text.ParseException;
+import java.util.Date;
 
 public class RentalsOverviewFragment extends ListFragment {
 
     RentalsListAdapter mAdapter;
+    private String mCity, mStreet, mState, mMonthlyRent, mLandlordName;
+    private boolean mIndividualLandlord;
+    private Date mCheckinDate, mCheckoutDate;
 
     public RentalsOverviewFragment() {
     }
@@ -54,16 +58,32 @@ public class RentalsOverviewFragment extends ListFragment {
         }
     }
 
+    private Bundle packBundleFromView(){
+        final Bundle bundle = new Bundle();
+        bundle.putString("city", mCity);
+        bundle.putString("street", mStreet);
+        bundle.putString("state", mState);
+        bundle.putString("rent", mMonthlyRent);
+        bundle.putString("landlord", mLandlordName);
+        return bundle;
+    }
+
+    private void getViewDetailedContent(View view){
+        mCity = ((TextView) view.findViewById(R.id.ri_city)).getText().toString();
+        mStreet = ((TextView) view.findViewById(R.id.ri_street)).getText().toString();
+        mState = ((TextView) view.findViewById(R.id.ri_state)).getText().toString();
+        mMonthlyRent = ((TextView) view.findViewById(R.id.ri_monthly_rent)).getText().toString();
+        mLandlordName = ((TextView) view.findViewById(R.id.ri_landlord)).getText().toString();
+    }
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         RentalEditFragment rentalEditFragment = new RentalEditFragment();
 
-        final Bundle bundle = new Bundle();
-        TextView tv = (TextView) v.findViewById(R.id.ri_city);
-        String s = tv.getText().toString();
-        bundle.putString("city", s);
-        rentalEditFragment.setArguments(bundle);
+        getViewDetailedContent(v);
+
+        rentalEditFragment.setArguments(packBundleFromView());
 
         this.getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, rentalEditFragment)

@@ -66,7 +66,7 @@ public class RentalsListAdapter extends BaseAdapter {
         final TextView riState = (TextView) itemLayout.findViewById(R.id.ri_state);
         //final TextView riLandlordName = (TextView) itemLayout.findViewById(R.id.ri_landlord);
         final TextView riTimeframe = (TextView) itemLayout.findViewById(R.id.ri_timeframe);
-        final TextView riTotal = (TextView) itemLayout.findViewById(R.id.ri_total);
+        final TextView riTotal = (TextView) itemLayout.findViewById(R.id.ri_monthly_rent);
 
         //timeframe
 
