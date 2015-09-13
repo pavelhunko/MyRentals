@@ -49,13 +49,9 @@ public class RentalsOverviewFragment extends ListFragment {
     }
 
     private void loadItems() {
-        try {
-            RentalDAOImpl rentalDAO = new RentalDAOImpl();
-            for (Rental r : rentalDAO.getAllRentals())
-                mAdapter.add(r);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        RentalDAOImpl rentalDAO = new RentalDAOImpl();
+        for (Rental r : rentalDAO.getAllRentals())
+            mAdapter.add(r);
     }
 
     private Bundle packBundleFromView(){

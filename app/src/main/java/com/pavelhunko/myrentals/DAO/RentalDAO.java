@@ -11,7 +11,7 @@ public interface RentalDAO {
     List<Rental> getAllRentals();
     Rental findRentalByID(int ID);
 
-    boolean createRental(Rental rental);
+    Rental createRental(Rental rental);
     boolean updateRental(Rental rental);
 //    OOS
     boolean deleteRental(Rental rental);

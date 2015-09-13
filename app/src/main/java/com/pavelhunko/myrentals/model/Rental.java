@@ -9,15 +9,15 @@ import java.util.Date;
 public class Rental {
 
 
-    private Integer id;
     private String street;
     private String city;
     private String state;
     private Integer monthlyRent;
     private Date moveInDate, moveOutDate;
 
-    public Rental(Integer id, String street, String city, String state, Integer monthlyRent, Date moveInDate, Date moveOutDate) {
-        this.id = id;
+    public Rental(){};
+
+    public Rental(String street, String city, String state, Integer monthlyRent, Date moveInDate, Date moveOutDate) {
         this.street = street;
         this.state = state;
         this.city = city;
@@ -28,13 +28,6 @@ public class Rental {
 
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getStreet() {
         return street;
@@ -83,8 +76,6 @@ public class Rental {
     public void setMoveOutDate(Date moveOutDate) {
         this.moveOutDate = moveOutDate;
     }
-
-    ;
 
 
 }

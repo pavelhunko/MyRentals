@@ -1,35 +1,47 @@
 package com.pavelhunko.myrentals.DAO;
 
-import android.provider.BaseColumns;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.pavelhunko.myrentals.db.RentalContract.RentalEntry;
 import com.pavelhunko.myrentals.model.Rental;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by pavelhunko@gmail.com on 03/Sep/2015.
  */
-public class RentalDAOImpl implements RentalDAO{
-
-
+public class RentalDAOImpl implements RentalDAO {
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
     List<Rental> rentals;
+    private SQLiteDatabase sqLiteDatabase;
+    private String[] allColumns = {RentalEntry.RENTAL_STREET, RentalEntry.RENTAL_CITY, RentalEntry.RENTAL_STATE, RentalEntry.RENTAL_MOVE_IN, RentalEntry.RENTAL_MOVE_OUT};
 
-    public RentalDAOImpl() throws ParseException {
-        rentals = new ArrayList<>();
-        Rental rental1 = new Rental(1,"atlantic ave 1", "Wildwood", "NJ", 200, FORMAT.parse("2015-05-13"), FORMAT.parse("2015-06-13"));
-        Rental rental2 = new Rental(1,"indian ave 23", "Atlantic City", "NJ", 100, FORMAT.parse("2014-08-13"), FORMAT.parse("2015-04-13"));
-        Rental rental3 = new Rental(1,"pacific ave 14", "New Jersey", "NJ", 400, FORMAT.parse("2013-05-13"), FORMAT.parse("2014-07-13"));
-        rentals.add(rental1);
-        rentals.add(rental2);
-        rentals.add(rental3);
+    private static RentalDAOImpl instance;
 
+    private RentalDAOImpl(Context context,SQLiteDatabase sqLiteDatabase) {
+        super();
+    }
+    public static synchronized RentalDAOImpl getInstance(Context context,SQLiteDatabase sqLiteDatabase){
+        if (instance==null){
+            instance=new RentalDAOImpl(context,sqLiteDatabase);
+        }
+        return instance;
+    }
+
+    public static synchronized RentalDAOImpl getExistingInstance() {
+        return instance;
+    }
+
+
+    public RentalDAOImpl() {
     }
 
 
@@ -43,9 +55,25 @@ public class RentalDAOImpl implements RentalDAO{
         return rentals.get(ID);
     }
 
-    @Override
-    public boolean createRental(Rental rental) {
-        return false;
+    public Rental createRental(Rental rental) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(RentalEntry.RENTAL_STREET, rental.getStreet());
+        contentValues.put(RentalEntry.RENTAL_CITY, rental.getCity());
+        contentValues.put(RentalEntry.RENTAL_STATE, rental.getState());
+        contentValues.put(RentalEntry.RENTAL_MOVE_IN, convertDateToString(rental.getMoveInDate()));
+        contentValues.put(RentalEntry.RENTAL_MOVE_OUT, convertDateToString(rental.getMoveOutDate()));
+
+        long insertId = sqLiteDatabase.insert(RentalEntry.TABLE_RENTALS, null, contentValues);
+        Cursor cursor = sqLiteDatabase.query(RentalEntry.TABLE_RENTALS, allColumns, RentalEntry._ID + "=" + insertId, null, null, null, null);
+        cursor.moveToFirst();
+        Rental newRental = null;
+        try {
+            newRental = cursorToRental(cursor);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cursor.close();
+        return newRental;
     }
 
     @Override
@@ -58,16 +86,25 @@ public class RentalDAOImpl implements RentalDAO{
         return false;
     }
 
+    private String convertDateToString(Date date) {
+        String stringDate = FORMAT.format(date);
+        return stringDate;
+    }
 
-    //    public static void packageRentalIntent(Intent intent, String street, String city, String state, Integer monthlyRent, Date moveInDate, Date moveOutDate) {
-//        intent.putExtra(RentalDAO.RENTALS_STREET, street);
-//        intent.putExtra(RentalDAO.RENTALS_CITY, city);
-//        intent.putExtra(RentalDAO.RENTALS_STATE, state);
-//        intent.putExtra(RentalDAO.RENTALS_MOVE_IN, moveInDate);
-//        intent.putExtra(RentalDAO.RENTALS_MOVE_OUT, moveOutDate);
-//
-//    }
+    private Date convertStringToDAte(String stringDate) throws ParseException {
+        return FORMAT.parse(stringDate);
+    }
 
+    private Rental cursorToRental(Cursor cursor) throws ParseException {
+        Rental rental = new Rental();
+        rental.setStreet(cursor.getString(0));
+        rental.setCity(cursor.getString(1));
+        rental.setState(cursor.getString(2));
+        rental.setMoveInDate(convertStringToDAte(cursor.getString(3)));
+        rental.setMoveOutDate(convertStringToDAte(cursor.getString(4)));
+
+        return rental;
+    }
 
 
 }

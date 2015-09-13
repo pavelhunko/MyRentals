@@ -3,9 +3,7 @@ package com.pavelhunko.myrentals.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
-
-import java.util.Date;
+import com.pavelhunko.myrentals.db.RentalContract.RentalEntry;
 
 /**
  * Created by pavelhunko@gmail.com on 03/Sep/2015.
@@ -13,6 +11,18 @@ import java.util.Date;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rentals_db";
     private static final int DATABASE_VERSION = 1;
+    private static final String TEXT_TYPE = " TEXT";
+    private static final String COMMA_SEP = ",";
+    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + RentalEntry.TABLE_RENTALS + " (" +
+            RentalEntry._ID + " INTEGER PRIMARY KEY, " +
+            RentalEntry.RENTAL_STREET + TEXT_TYPE + COMMA_SEP +
+            RentalEntry.RENTAL_CITY + TEXT_TYPE + COMMA_SEP +
+            RentalEntry.RENTAL_STATE + TEXT_TYPE + COMMA_SEP +
+            RentalEntry.RENTAL_MOVE_IN + TEXT_TYPE + COMMA_SEP +
+            RentalEntry.RENTAL_MOVE_OUT + TEXT_TYPE + COMMA_SEP +
+            " );";
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + RentalEntry.TABLE_RENTALS;
+
 
     private static DBHelper sInstance;
 
@@ -30,23 +40,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(SQL_CREATE_ENTRIES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(db);
     }
 
-    //implement http://androidopentutorials.com/android-sqlite-example/
 
-    public static abstract class RentalEntry implements BaseColumns {
-        public static final String TABLE_RENTALS = "rentals";
-        public static final String RENTAL_ID = "street";
-        public static final String RENTAL_STREET = "street";
-        public static final String RENTAL_CITY = "city";
-        public static final String RENTAL_STATE = "state";
-        public static final String RENTAL_MOVE_IN = "movein";
-        public static final String RENTAL_MOVE_OUT = "moveout";
-    }
+
 }
